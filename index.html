@@ -152,27 +152,94 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-第一篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Spring之概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/13/%E7%AC%AC%E4%B8%80%E7%AF%87/">第一篇</a>
+      <a class="article-title" href="/2020/07/26/Spring%E4%B9%8B%E6%A6%82%E8%BF%B0/">Spring之概述</a>
     </h1>
   
 
         
-        <a href="/2020/07/13/%E7%AC%AC%E4%B8%80%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2020-07-13T05:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-13</time>
+        <a href="/2020/07/26/Spring%E4%B9%8B%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2020-07-25T16:07:44.896Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一张"><a href="#第一张" class="headerlink" title="##第一张"></a>##第一张</h2><h2 id="第二章"><a href="#第二章" class="headerlink" title="###第二章"></a>###第二章</h2><p>####第三章</p>
+        <h1 id="Spring之概述"><a href="#Spring之概述" class="headerlink" title="Spring之概述"></a><font face="行楷">Spring之概述</font></h1><p><font face ="微软雅黑" color =red size=3>仅作学习记录</font></p>
+<hr>
+<h2 id="什么是Spring"><a href="#什么是Spring" class="headerlink" title="什么是Spring"></a><font face="行楷">什么是Spring</font></h2><p><a href="https://spring.io/" target="_blank" rel="noopener" title="Spring">Spring官网</a></p>
+<p>简而言之，做以下总结：</p>
+<ul>
+<li><p>Spring是轻量级的开源的<a href="https://www.oracle.com/java/technologies/java-ee-glance.html" target="_blank" rel="noopener">JavaEE</a>框架</p>
+</li>
+<li><p>Spring可以解决企业应用开发复杂性</p>
+</li>
+<li><p>Spring有两个核心部分：IOC和AOP</p>
+<p>IOC（控制反转）：把创建对象的过程交给Spring进行管理</p>
+<p>AOP（面向切面）：不修改源代码进行功能增强</p>
+</li>
+<li><p>Spring的特点：</p>
+<ol>
+<li>方便解耦，简化开发</li>
+<li>AOP编程支持</li>
+<li>方便程序测试</li>
+<li>方便和其他框架进行整合</li>
+<li>方便进行事务开发</li>
+<li>降低API开发</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>即控制反转，把对象和对象之间的调用过程，交给Spring管理。目的在于降低耦合度</p>
+<p>IOC底层原理：XML解析、工厂模式、反射</p>
+<h4 id="IOC接口："><a href="#IOC接口：" class="headerlink" title="IOC接口："></a>IOC接口：</h4><ul>
+<li><p>IOC思想基于容器完成，IOC容器底层就是对象工厂</p>
+</li>
+<li><p>Spring提供IO容器实现两种方式（两个接口）</p>
+<ol>
+<li><p>BeanFactory:IOC容器基本实现，是Spring内部使用接口，不提供开发人员进行使用</p>
+<p><font size=2 face="行楷" color = red>加载配置文件时不会创建对象，在获取时才会创建对象</font></p>
+</li>
+<li><p>ApplicationContextFactory接口的子类，提供更多强大功能，一般由开发人员进行使用</p>
+<p><font size=2 face="行楷" color = red>加载配置文件时就会将对象创建</font></p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="Bean管理"><a href="#Bean管理" class="headerlink" title="Bean管理"></a>Bean管理</h3><ul>
+<li><p>基于XML配置文件方式创建对象以及注入属性</p>
+<ol>
+<li><p>创建一个用于测试的Java类文件（Person、TestPerson）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> TestClass;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zuozikun</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2020-07-25 16:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.age+<span class="string">"岁的"</span>+<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ul>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> TestClass;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.model.TestClass;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2020-07-25 16:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPerson</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPerson</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean1.xml"</span>);</span><br><span class="line">        Person person = applicationContext.getBean(<span class="string">"person"</span>, Person<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        person.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><ol start="2">
+<li><p>创建一个Bean文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置Hello对象创建--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean id="Hello" class="Test1.Hello"&gt;&lt;/bean&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--通过set方法注入属性    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"person"</span> <span class="attr">class</span>=<span class="string">"TestClass.Person"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"22"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><font size=2 color=red face ="行楷">id:创建对象的唯一标识</font></li>
+<li><font size=2 color=red face ="行楷">name:方法中的属性名</font></li>
+<li><font size=2 color=red face ="行楷">value:你想要设置的属性值</font></li>
+</ul>
+</li>
+<li><p>运行结果</p>
+<p><img src="C:%5CBlog%5Csource_image%5Cs1.PNG" alt=""></p>
+</li>
+</ol>
 
       
 
@@ -185,7 +252,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/13/%E7%AC%AC%E4%B8%80%E7%AF%87/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/26/Spring%E4%B9%8B%E6%A6%82%E8%BF%B0/">展开全文 >></a>
         </p>
       
 
